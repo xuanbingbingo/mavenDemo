@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="webapp:war exploded">
+    <output-path>$USER_HOME$/apache-tomcat-9.0.0.M22/webapps/webapp</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="webapp" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.imooc.app:course:1.0-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/webapp/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="webapp/web/Web" />
+    </root>
+  </artifact>
+</component>
