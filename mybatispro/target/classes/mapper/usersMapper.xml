@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper用于定一个映射配置文件的根结点
+namespace是指命名空间，主要进行session级别的缓存管理，
+命名空间默认情况是使用我们要操作的实体类的全路径-->
+<mapper namespace="com.bingo.entity.Users">
+    <!--<select id="findAll" resultType="com.bingo.entity.Users">-->
+        <!--select * from Users;-->
+    <!--</select>-->
+
+    <!--<select id="findById" resultType="com.bingo.entity.Users">-->
+    <!--select * from Users where id = #{id};-->
+    <!--</select>-->
+
+
+
+
+
+    <!--查询操作-->
+
+    <!--通过配置动态sql语句，实现一个配置进行多种查询-->
+    <!--<select id="findUsers" resultType="com.bingo.entity.Users">-->
+        <!--select * from Users-->
+        <!--<if test="id != null">-->
+            <!--where id = #{id}-->
+        <!--</if>-->
+    <!--</select>-->
+
+
+    <!--自定义映射关系集合,针对不一致的属性名称-->
+    <select id="findUsers" resultMap="forUsers">
+        select * from Users
+        <if test="id != null">
+            where id = #{id}
+        </if>
+    </select>
+
+    <resultMap id="forUsers" type="com.bingo.entity.Users">
+        <!--主键不一致的配置如下-->
+        <!--<id column="" property=""></id>-->
+        <!---->
+        <!--其他实体类中字段不一致的配置如下：
+        name是实体类中的属性名，username是数据库中的属性名，下面这配置是将数据库中的属性名的值复制给实体类中的属性名的值-->
+        <!--<result column="username" property="name"></result>-->
+
+        <!-- 一对多的映射（用户类中有List<Address>这个属性 ）-->
+        <!--绑定id主键-->
+        <id column="id" property="id"></id>
+
+        <collection property="addresses" column="id" ofType="com.bingo.entity.Address" select="getAddress"></collection>
+
+    </resultMap>
+
+    <select id="getAddress" resultType="com.bingo.entity.Address">
+        select * from address where userid = #{id}
+    </select>
+
+
+
+
+    <!--增加操作-->
+
+    <!--<insert id="addUser" useGeneratedKeys="true" keyProperty="id">-->
+        <!--insert into users(username,userpass,nickname,age,gender,phone,email,createTime,updateTime,lastLogin,userStatus,remark)-->
+        <!--values(#{username},#{userpass},#{nickname},#{age},#{gender},#{phone},#{email},#{createTime},#{updateTime},#{lastLogin},#{userStatus},#{remark})-->
+    <!--</insert>-->
+
+    <sql id="user_fields">
+        username,userpass,nickname,age,gender,phone,email,createTime,updateTime,lastLogin,userStatus,remark
+    </sql>
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        insert into users(<include refid="user_fields"></include>)
+        values(#{username},#{userpass},#{nickname},#{age},#{gender},#{phone},#{email},#{createTime},#{updateTime},#{lastLogin},#{userStatus},#{remark})
+    </insert>
+
+
+
+
+    <!--修改操作-->
+    <update id="updateUser">
+        update users
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="userpass != null">userpass = #{userpass},</if>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="createTime != null">createTime = #{createTime},</if>
+            <if test="updateTime != null">updateTime = #{updateTime},</if>
+            <if test="lastLogin != null">lastLogin = #{lastLogin},</if>
+            <if test="userStatus != null">userStatus = #{userStatus},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </set>
+--         set username = #{username},
+--         userpass = #{username},
+--         nickname = #{nickname},
+--         age = #{age},
+--         gender = #{gender},
+--         phone = #{phone},
+--         email = #{email},
+--         createTime = #{createTime},
+--         updateTime = #{updateTime},
+--         lastLogin = #{lastLogin},
+--         userStatus = #{userStatus},
+--         remark = #{remark}
+        where id = #{id}
+    </update>
+
+
+
+
+    <!--删除操作-->
+    <delete id="delUser">
+        delete from users where id = #{id}
+    </delete>
+</mapper>
