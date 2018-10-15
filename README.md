@@ -3,3 +3,5 @@
 ## webapp是一个使用了Maven本地仓库中course工具类的web项目，并热部署到了本地tomcat服务器上，其中含有简单的servlet和jsp页面
 ## myBatisDemo1是一个快速maven项目，依赖包有mybatis，mysql驱动，项目主要记录了使用mybatis管理本地mysql数据库的配置以及开发流程
 ## mybatispro是一个使用了maven项目，并使用mybatis进行数据库的管理，同时引入了log4j的一个后台用户管理的web项目，可发布上线（其中包含了mybatis的增删改查以及动态sql语句和多表关联查询的操作，是可以用来给之后使用mybatis的项目做常规参考的）
+## spring_ioc是使用xml配置的方式进行bean的管理的一个详细配置的项目
+## spring_ioc_annotation是使用注解的方式进行bean的管理的一个详细配置的项目，其中也包含了xml配置和注解的混合方式进行bean的管理
