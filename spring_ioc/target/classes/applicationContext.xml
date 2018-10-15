@@ -1,28 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--demo1:-->
     <!--userService的创建权交给了spring-->
-    <bean id="userService" class="com.bingo.ioc.demo1.UserServiceImpl">
+    <bean id="userService" class="com.bingo.ioc.demo1.UserServiceImpl" p:name="bingo">
         <!--设置属性-->
-        <property name="name" value="bingo"/>
+        <!--<property name="name" value="bingo"/>-->
     </bean>
 
+    <!--demo2:-->
     <!--bean实例化的三种方式-->
 
     <!--第一种：无餐构造器的方式-->
     <bean id="bean1" class="com.bingo.ioc.demo2.Bean1" init-method="init" destroy-method="customDestroy">
         <property name="name" value="bingo"/>
     </bean>
-    <!--&lt;!&ndash;第二种：静态工厂的方式&ndash;&gt;-->
-    <!--<bean id="bean2" class="com.bingo.ioc.demo2.Bean2Factory" factory-method="createBean2" scope="prototype"/>-->
-    <!--&lt;!&ndash;第三种：实例工厂的方式&ndash;&gt;-->
-    <!--<bean id="bean3Factory" class="com.bingo.ioc.demo2.Bean3Factory"/>-->
-    <!--<bean id="bean3" factory-bean="bean3Factory" factory-method="createBean3" scope="prototype"/>-->
+    <!--第二种：静态工厂的方式-->
+    <bean id="bean2" class="com.bingo.ioc.demo2.Bean2Factory" factory-method="createBean2" scope="prototype"/>
+    <!--第三种：实例工厂的方式-->
+    <bean id="bean3Factory" class="com.bingo.ioc.demo2.Bean3Factory"/>
+    <bean id="bean3" factory-bean="bean3Factory" factory-method="createBean3" scope="prototype"/>
 
     <!--bean的作用域：默认为singleton（单例），prototype（每次调用getBean()都会返回一个新的实例）,request, session-->
 
-    <!--增强bean-->
-    <bean class="com.bingo.ioc.demo2.MyBeanPostProcessor"></bean>
+    <!--demo3:-->
+    <!--增强bean,代理对象，实现不修改原来bean方法的源码的同时，增加一下其他的逻辑判断-->
+    <bean class="com.bingo.ioc.demo3.MyBeanPostProcessor"/>
+    <bean id="myBean" class="com.bingo.ioc.demo3.UserDaoImpl"/>
+
+    <!--demo4:-->
+    <!--属性的注入方式：构造方法、set方法-->
+
+    <!--第一种：构造方法的属性注入方式-->
+    <bean id="user" class="com.bingo.ioc.demo4.User">
+        <constructor-arg name="name" value="bingo"></constructor-arg>
+        <constructor-arg name="age" value="18"></constructor-arg>
+    </bean>
+
+    <!--demo5:-->
+    <!--复杂类型（数组类型，list类型，map类型，set类型,properties类型）的属性注入-->
+    <bean id="collectionBean" class="com.bingo.ioc.demo5.CollectionBean">
+        <!--数组类型的属性注入-->
+        <property name="arrs">
+            <list>
+                <value>aaa</value>
+                <value>bbb</value>
+                <value>ccc</value>
+            </list>
+        </property>
+        <!--list类型的属性注入（如果value是引用类型，则将value替换成ref即可）-->
+        <property name="list">
+            <list>
+                <value>aaa</value>
+                <value>bbb</value>
+                <value>ccc</value>
+            </list>
+        </property>
+        <!--set类型的属性注入-->
+        <property name="set">
+            <set>
+                <value>ddd</value>
+                <value>eee</value>
+                <value>ddd</value>
+            </set>
+        </property>
+        <!--map类型的属性注入-->
+        <property name="map">
+            <map>
+                <entry key="aaa" value="1"/>
+                <entry key="bbb" value="2"/>
+                <entry key="ccc" value="3"/>
+            </map>
+        </property>
+        <!--properties类型的属性注入-->
+        <property name="properties">
+            <props>
+                <prop key="username">root</prop>
+                <prop key="papssword">123456</prop>
+            </props>
+        </property>
+    </bean>
+
+
 </beans>
