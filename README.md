@@ -5,3 +5,4 @@
 ## mybatispro是一个使用了maven项目，并使用mybatis进行数据库的管理，同时引入了log4j的一个后台用户管理的web项目，可发布上线（其中包含了mybatis的增删改查以及动态sql语句和多表关联查询的操作，是可以用来给之后使用mybatis的项目做常规参考的）
 ## spring_ioc是使用xml配置的方式进行bean的管理的一个详细配置的项目
 ## spring_ioc_annotation是使用注解的方式进行bean的管理的一个详细配置的项目，其中也包含了xml配置和注解的混合方式进行bean的管理
+## spring_aop是使用xml配置的方式（非Aspectj的传统方式）进行目标类的代理（包含手动代理和自动代理，包含一般切面（只有通知的情况）和带有切入点的切面的代理）
