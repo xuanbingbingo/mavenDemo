@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--demo5:spring的基于bean名称的自动代理（传统方式-即非AspectJ的方式，此方式是针对不带切入点的一般切面）-->
+
+    <!--配置(多个)目标类-->
+    <bean id="studentDao" class="com.bingo.aop.demo5.StudentDaoImpl"/>
+    <bean id="customDao"  class="com.bingo.aop.demo5.CustomDao"/>
+
+    <!--配置(多个)通知-->
+    <bean id="myBeforeAdvice" class="com.bingo.aop.demo5.MyBeforeAdvice"/>
+    <bean id="myAroundAdvice" class="com.bingo.aop.demo5.MyAroundAdvice"/>
+
+    <!--通过配置实现自动代理(根据目标类的名称自动代理)-->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames" value="*Dao"/>
+        <property name="interceptorNames" value="myBeforeAdvice"/>
+    </bean>
+</beans>

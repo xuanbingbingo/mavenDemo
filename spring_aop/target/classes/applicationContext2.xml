@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--demo4:spring的带有切入点的切面配置案例（传统方式-即非AspectJ的方式）-->
+    <!--配置一个目标类-->
+    <bean id="customDao" class="com.bingo.aop.demo4.CustomDao"/>
+
+    <!--配置一个通知-->
+    <bean id="myAroundAdvice" class="com.bingo.aop.demo4.MyAroundAdvice"/>
+    <!--配置一个环绕通知类型(一般的切面是使用通知作为切面，若要对某个方法进行增强，就需要配置一个带有切入点的切面)-->
+
+    <!--配置切面-->
+    <bean id="myAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <!--pattern配置的是正则表达式-->
+        <property name="pattern" value=".*save.*"/>
+        <property name="advice" ref="myAroundAdvice"/>
+    </bean>
+    <!--Spring的aop产生代理对象(ProxyFactoryBean对目标类的"某个方法"产生环绕通知)-->
+    <bean id="customDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--配置目标类-->
+        <property name="target" ref="customDao"/>
+
+        <!--实现的接口-->
+        <!--<property name="proxyInterfaces" value="com.bingo.aop.demo4.StudentDao"/>-->
+
+        <!--如果没有实现接口，则需要使用cgglib代理方式，将proxyTargetClass设置为true即可-->
+        <property name="proxyTargetClass" value="true"/>
+        <!--采用的拦截的名称-->
+        <property name="interceptorNames" value="myAdvisor"/>
+        <!--对于需要植入目标的advice-->
+    </bean>
+</beans>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--demo5:spring的基于切面信息的自动代理（传统方式-即非AspectJ的方式，此方式是针对带切入点的切面）-->
+
+    <!--配置(多个)目标类-->
+    <bean id="studentDao" class="com.bingo.aop.demo6.StudentDaoImpl"/>
+    <bean id="customDao"  class="com.bingo.aop.demo6.CustomDao"/>
+
+    <!--配置(多个)通知-->
+    <bean id="myBeforeAdvice" class="com.bingo.aop.demo6.MyBeforeAdvice"/>
+    <bean id="myAroundAdvice" class="com.bingo.aop.demo6.MyAroundAdvice"/>
+
+    <!--配置切面-->
+    <bean id="myAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="pattern" value="com\.bingo\.aop\.demo6\.CustomDao\.save"/>
+        <property name="advice" ref="myAroundAdvice"/>
+    </bean>
+    <!--通过配置实现自动代理(根据目标类的名称自动代理)-->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+</beans>
