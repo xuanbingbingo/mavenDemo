@@ -7,3 +7,4 @@
 ## spring_ioc_annotation是使用注解的方式进行bean的管理的一个详细配置的项目，其中也包含了xml配置和注解的混合方式进行bean的管理
 ## spring_aop是使用xml配置的方式（非Aspectj的传统方式）进行目标类的代理（包含手动代理和自动代理，包含一般切面（只有通知的情况）和带有切入点的切面的代理）
 ## spring_aop_aspectj是使用注解和xml配置的方式进行Aspectj的开发（实际项目中会使用这种Aspectj的方式进行AOP开发）
+## jdbc_template是spring框架自带的通过简化jdbc操作的一系列操作数据库的api的方法的详细描述，其中也包含了将数据封装为实体类数据
