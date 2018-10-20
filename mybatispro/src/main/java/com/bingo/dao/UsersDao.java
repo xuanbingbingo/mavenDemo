@@ -13,7 +13,7 @@ public class UsersDao {
     private Users user;
     private SqlSession getSqlSession(){
         sqlSession = SqlSessionFactoryUtils.getSqlSessionFactory().openSession();
-        return sqlSession;
+        return sqlSession;0
     }
     public List<Users> findAll(){
         try{
