@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:tx="http://www.springframework.org/schema/tx"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd   
+    http://www.springframework.org/schema/tx     
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">  
+    
+    <!--准备好符合Spring规范ApplicationContext配置文件——Spring的IoC核心-->
+	<!-- 有效连接数据库：必须配置相应的数据源，以支持底层的连接对象的获取 -->
+	<!-- #DBCP数据库连接池配置属性详细内容可参考官网描述：
+       #http://commons.apache.org/proper/commons-dbcp/configuration.html
+       还有其它数据源的配置，如c3p0、dbcp、proxool、druid（阿里，据说很强大，可以一试）
+       综合来说，稳定性是druid>dbcp>=c3p0>proxool
+       Spring 推荐使用dbcp；
+       -->
+    <!--第一步：配置数据源-->
+    <bean id="myDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <property name="url" value="jdbc:mysql://127.0.0.1:3306/test" />
+    <property name="username" value="root" />
+    <property name="password" value="mysql" />
+    </bean>
+
+    <!-- 第二步：配置事务管理器
+     配置示例-1：JDBC事务管理器 配置——必须要有有效的数据源，即DataSource-->
+    <bean id="jdbcTransactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="myDataSource" />
+    </bean>  
+    <!--事务模板：Spring提供的事务处理工具类 -->
+    <bean id="transactionTemplate"  
+        class="org.springframework.transaction.support.TransactionTemplate">  
+        <property name="transactionManager" ref="jdbcTransactionManager" />
+        
+        <!--ISOLATION_DEFAULT 表示由使用的数据库决定  -->  
+        <property name="isolationLevelName" value="ISOLATION_DEFAULT"/>  
+        <property name="propagationBehaviorName" value="PROPAGATION_REQUIRED"/>  
+        <!-- <property name="timeout" value="30"/> -->  
+    </bean>
+    <!--第三步：含事务管理的业务逻辑处理，声明方式或注解方式-->
+
+    <!--配置示例-2：Hibernater事务管理器，Spring4+自带了(3-5)3个管理器-->
+    <!-- 让spring 去读取指定路径下的资源文件 -->
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:jdbc.properties"/>
+    </bean>-->
+    <!--<bean id="mySessionFactory"
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mappingResources">
+            <list>
+                <value>product.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${dialect}</prop>
+                <prop key="hibernate.show_sql">${show_sql}</prop>
+                <prop key="hibernate.format_sql">${format_sql}</prop>
+                <prop key="hibernate.use_sql_commants">${use_sql_comments}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hbm2ddl.auto}</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="mySessionFactory" />
+    </bean>-->
+    <!-- 启动使用注解实现声明式事务管理的支持  
+    <tx:annotation-driven transaction-manager="txManager" /> -->  
+</beans>  

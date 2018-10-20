@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+    http://www.springframework.org/schema/tx     
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+    <!-- 引入数据库连接属性配置文件 -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:database.properties" />
+    </bean>
+	<!-- 配置数据源 -->  
+	<!-- #DBCP数据库连接池配置属性详细内容可参考官网描述：
+       #http://commons.apache.org/proper/commons-dbcp/configuration.html 
+       -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${driver}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${initialSize}"></property>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="${maxIdle}"></property>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${minIdle}"></property>
+    </bean>
+
+    <!-- jdbc事务管理器 -->  
+    <bean id="txManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource" />	
+    </bean>  
+
+    <!-- 2、注释模式事务：启动使用注解实现声明式事务管理的支持   -->
+    <!--<tx:annotation-driven transaction-manager="txManager" />-->
+    <!-- 要创建的事务服务对象 -->
+    <bean id="bookService" class="com.bingo.service.BookServiceImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 1、通过事务通知的(AOP)模式实现事务管理
+    事务通知-->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <!--事务语义定义... -->
+        <tx:attributes>
+            <!-- 以get开头的所有方法都为只读事务 -->
+            <tx:method name="find*"  read-only="true"/>
+            <!-- 其它方法使用默认事务设置 -->
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- 确保上述事务通知对定义在BookService接口中的方法都起作用，
+           即对每个方法都开启一个对应的事务 -->
+    <aop:config>
+        <aop:pointcut id="bookServiceOperation" expression="execution(* com.bingo.service.BookService.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="bookServiceOperation"/>
+    </aop:config>
+
+
+</beans>  

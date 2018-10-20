@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component LANGUAGE_LEVEL="JDK_1_7" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/target/test-classes"/>
+	<contentEntry url="file://$MODULE_DIR$">
+		<excludeFolder url="file://$MODULE_DIR$/target"/>
+	</contentEntry>
+	<lib name="Maven: junit:junit:4.11" scope="TEST"/>
+	<lib name="Maven: org.hamcrest:hamcrest-core:1.3" scope="TEST"/>
+	<lib name="javax.annotation.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/javax.annotation.jar!/"/>
+	</lib>
+	<lib name="javax.ejb.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/javax.ejb.jar!/"/>
+	</lib>
+	<lib name="javax.jms.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/javax.jms.jar!/"/>
+	</lib>
+	<lib name="javax.persistence.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/javax.persistence.jar!/"/>
+	</lib>
+	<lib name="javax.resource.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/javax.resource.jar!/"/>
+	</lib>
+	<lib name="javax.servlet.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/javax.servlet.jar!/"/>
+	</lib>
+	<lib name="javax.servlet.jsp.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/javax.servlet.jsp.jar!/"/>
+	</lib>
+	<lib name="javax.servlet.jsp.jstl.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/javax.servlet.jsp.jstl.jar!/"/>
+	</lib>
+	<lib name="javax.transaction.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/javax.transaction.jar!/"/>
+	</lib>
+	<levels>
+		<level name="Maven: junit:junit:4.11" value="project"/>
+		<level name="Maven: org.hamcrest:hamcrest-core:1.3" value="project"/>
+	</levels>
+</component>
