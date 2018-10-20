@@ -8,3 +8,5 @@
 ## spring_aop是使用xml配置的方式（非Aspectj的传统方式）进行目标类的代理（包含手动代理和自动代理，包含一般切面（只有通知的情况）和带有切入点的切面的代理）
 ## spring_aop_aspectj是使用注解和xml配置的方式进行Aspectj的开发（实际项目中会使用这种Aspectj的方式进行AOP开发）
 ## jdbc_template是spring框架自带的通过简化jdbc操作的一系列操作数据库的api的方法的详细描述，其中也包含了将数据封装为实体类数据
+## spring_transaction是spring的事务管理（编程式事务管理（包含了手动编码和事务模版两种方式）和声名式事务管理（包含了tx拦截式和全注解两种方式））
+## sm是Spring和Mybatis进行整合的一个web项目，用到了servlet和jsp进行页面显示的控制
