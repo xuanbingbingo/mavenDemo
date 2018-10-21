@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="springMVCTest:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="springMVCTest.war">
+      <element id="artifact" artifact-name="springMVCTest:war exploded" />
+    </root>
+  </artifact>
+</component>

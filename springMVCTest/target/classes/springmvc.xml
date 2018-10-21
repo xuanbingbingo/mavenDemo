@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--以下是基于xml配置的方式进行spring mvc的开发（第一步配置handlerMapping，第二步配置handler）-->
+    <!--&lt;!&ndash;配置handler mapping，将url请求映射到handler&ndash;&gt;-->
+    <!--<bean id="handlerMappping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
+        <!--<property name="mappings">-->
+            <!--<props>-->
+                <!--&lt;!&ndash;配置test请求对应的handler&ndash;&gt;-->
+                <!--<prop key="/test">testHandler</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;配置handler&ndash;&gt;-->
+    <!--<bean id="testHandler" class="com.bingo.handler.MyHandler"></bean>-->
+
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--配置前缀-->
+        <property name="prefix" value="/"/>
+        <!--配置后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--自动扫描包注解-->
+    <context:component-scan base-package="com.bingo.handler"/>
+</beans>
