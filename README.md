@@ -10,3 +10,6 @@
 ## jdbc_template是spring框架自带的通过简化jdbc操作的一系列操作数据库的api的方法的详细描述，其中也包含了将数据封装为实体类数据
 ## spring_transaction是spring的事务管理（编程式事务管理（包含了手动编码和事务模版两种方式）和声名式事务管理（包含了tx拦截式和全注解两种方式））
 ## sm是Spring和Mybatis进行整合的一个web项目，用到了servlet和jsp进行页面显示的控制
+## springMVCTest是spring mvc的入门案例
+## springMVCdataBind是spring mvc中常用的几种数据绑定的方式（包含有返回实例对象的json格式的数据的方式，此方式需要引入jackson依赖）
+## springMVCRestful是spring mvc中使用restful方式进行请求的解析和响应的案例
