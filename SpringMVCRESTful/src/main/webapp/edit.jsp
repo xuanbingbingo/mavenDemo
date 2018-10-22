@@ -50,6 +50,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-3">
+                <%--通过这个隐藏域，将post请求转化成put请求--%>
                 <input type="hidden" name="_method" value="PUT"/>
                 <button type="submit" class="btn btn-default">提交</button>
             </div>

@@ -21,6 +21,7 @@ public class CourseController {
     @PostMapping(value = "/add")
     public String add(Course course){
         courseDAO.add(course);
+        //重定向页面
         return "redirect:/getAll";
     }
 
