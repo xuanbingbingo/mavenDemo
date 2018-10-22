@@ -13,3 +13,4 @@
 ## springMVCTest是spring mvc的入门案例
 ## springMVCdataBind是spring mvc中常用的几种数据绑定的方式（包含有返回实例对象的json格式的数据的方式，此方式需要引入jackson依赖）
 ## springMVCRestful是spring mvc中使用restful方式进行请求的解析和响应的案例
+## springMVCIntercepter是spring mvc中使用拦截器来进行用户登陆拦截的配置和使用
