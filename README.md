@@ -14,3 +14,5 @@
 ## springMVCdataBind是spring mvc中常用的几种数据绑定的方式（包含有返回实例对象的json格式的数据的方式，此方式需要引入jackson依赖）
 ## springMVCRestful是spring mvc中使用restful方式进行请求的解析和响应的案例
 ## springMVCIntercepter是spring mvc中使用拦截器来进行用户登陆拦截的配置和使用
+## myspringboot是spring boot的开发流程配置
+## oa是ssm整合开发的一个简易oa系统（主要有人员管理，报销单的审批等功能），是后面使用ssm架构开发项目可供参考的项目架构
