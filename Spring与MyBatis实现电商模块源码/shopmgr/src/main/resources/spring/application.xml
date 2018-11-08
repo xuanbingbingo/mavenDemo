@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      				  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+      				  http://www.springframework.org/schema/tx
+      				  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+      				  http://www.springframework.org/schema/context
+      				  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+      				  ">
+
+    <!-- 声明用了annotation注解bean
+           开启组件扫描：它会到基础包下扫描@Service @Repository @Controller @Component这四种注解声明的bean，
+          扫描后会将这些bean交由Spring容器管理
+    -->
+    <context:component-scan base-package="com.imooc.shop"></context:component-scan>
+
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"/>
+
+    <!-- 配置sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+          p:dataSource-ref="dataSource">
+        <!-- 配置类型别名：采用包扫描的方式到基础包下扫描所有的类，作为MyBatis2能够转换的类型，多个包之间用;分隔 -->
+        <property name="typeAliasesPackage">
+            <value>
+                com.imooc.shop.bean
+            </value>
+        </property>
+    </bean>
+
+    <!-- 配置数据访问接口 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:sqlSessionFactoryBeanName="sqlSessionFactory">
+        <!-- 配置数据访问接口：采用包扫描的方式到基础包下扫描所有的类，作为MyBatis2的数据访问接口，
+            并创建这些类的代理对象，创建出来后会把这些代理对象交给Spring容器管理，bean的id名默认为接口的类名前面首字母小写
+           多个包之间用;分隔 -->
+        <property name="basePackage">
+            <value>
+                com.imooc.shop.repository
+            </value>
+        </property>
+    </bean>
+
+    <!-- 配置DataSourceTransactionManager -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
+
+    <!-- 开启annotation注解事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>

@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.imooc</groupId>
+    <artifactId>shopmgr</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>shop Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+    <!-- 配置的全局的属性 -->
+    <properties>
+        <junit.version>4.11</junit.version>
+        <jsp.api.version>8.5.5</jsp.api.version>
+        <jstl.version>1.2</jstl.version>
+        <spring.version>4.1.6.RELEASE</spring.version>
+        <aspectjweaver.version>1.8.5</aspectjweaver.version>
+        <mybatis.version>3.2.8</mybatis.version>
+        <mybatis.spring.version>1.2.2</mybatis.spring.version>
+        <c3p0.version>0.9.5</c3p0.version>
+        <mysql.version>5.1.35</mysql.version>
+        <log4j.version>1.2.17</log4j.version>
+        <json.version>2.4</json.version>
+    </properties>
+
+    <!-- 配置项目需要哪些jar包 -->
+    <dependencies>
+        <!-- junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <!-- 该jar包保留到测试 -->
+            <scope>test</scope>
+        </dependency>
+        <!-- jsp-api、servlet-api、el -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jsp-api</artifactId>
+            <version>${jsp.api.version}</version>
+            <!-- 该jar包最终由Web容器提供 -->
+            <scope>provided</scope>
+        </dependency>
+        <!-- jstl -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+        <!-- Spring4 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver.version}</version>
+        </dependency>
+        <!-- mybatis3 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis.spring.version}</version>
+        </dependency>
+        <!-- c3p0 -->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>${c3p0.version}</version>
+        </dependency>
+        <!-- mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+        <!-- log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <!-- json-lib -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>${json.version}</version>
+            <!-- 指定jar包jdk版本的依赖 -->
+            <classifier>jdk15</classifier>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <finalName>shopmgr</finalName>
+    </build>
+</project>

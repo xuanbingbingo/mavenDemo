@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imooc.shop.repository.ArticleMapper">
+
+	<!-- 配置一个结果集映射 -->
+	<resultMap id="articleResultMap" type="Article">
+		<result column="putaway_date" property="putawayDate"></result>
+		<result column="create_date" property="createDate"></result>
+		<!-- 查询出商品的类型 ：关联映射  N-1 -->
+		<association property="articleType" javaType="ArticleType"
+		     column="TYPE_CODE" select="com.imooc.shop.repository.ArticleTypeMapper.getTypeByCode"></association>
+	</resultMap>
+
+	<sql id="pageWhere">
+		<where>
+			<if test="typeCode !=null &amp;&amp; typeCode !=''">
+				and TYPE_CODE like CONCAT("",#{typeCode},"%")
+			</if>
+			<if test="secondType !=null &amp;&amp; secondType !=''">
+				and TYPE_CODE = #{secondType}
+			</if>
+			<if test="title !=null &amp;&amp; title !=''">
+				and title like CONCAT("%" , #{title} , "%")
+			</if>
+		</where>
+	</sql>
+
+	<select id="searchArticles" resultType="Article">
+		select * from ec_article
+		<include refid="pageWhere"></include>
+		LIMIT #{pager.firstParam} , #{pager.pageSize}
+	</select>
+
+	<select id="count" resultType="int" >
+		 select count(* ) from ec_article
+		<include refid="pageWhere"></include>
+	</select>
+
+	<!-- 修改物品 -->
+	<update id="update" parameterType="Article">
+		update ec_article
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="title != null">title = #{title},</if>
+			<if test="supplier != null">supplier = #{supplier},</if>
+			<if test="price != null">price = #{price},</if>
+			<if test="locality != null">locality = #{locality},</if>
+			<if test="storage != null">storage = #{storage},</if>
+			<if test="image != null">image = #{image},</if>
+			<if test="description != null">description = #{description},</if>
+			<if test="articleType.code != null">type_code = #{articleType.code},</if>
+		</trim>
+		<where> id = #{id}</where>
+	</update>
+
+	<insert id="save" parameterType="Article">
+		insert into ec_article(title, supplier, price, locality, putaway_date,
+		storage, image, description, type_code, create_date)
+		values(#{title}, #{supplier}, #{price}, #{locality},
+		#{putawayDate}, #{storage}, #{image},
+		#{description}, #{articleType.code}, #{createDate})
+	</insert>
+
+
+</mapper>

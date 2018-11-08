@@ -1,0 +1,4 @@
+com\mooc\mybatis\dao\PersonMapper.class
+com\mooc\mybatis\test\MyBatisTest.class
+com\mooc\mybatis\bean\Dept.class
+com\mooc\mybatis\bean\Person.class

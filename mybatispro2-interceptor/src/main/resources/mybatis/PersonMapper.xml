@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mooc.mybatis.dao.PersonMapper" >
+
+  <delete id="deletePerson" parameterType="int">
+    delete from person where id = #{id}
+  </delete>
+
+  <!--<select id="getPersonByNameAndGender" resultType="person">-->
+    <!--select * from person where username = #{param1} AND gender = #{param2}-->
+  <!--</select>-->
+
+  <!--<select id="getPersonByNameAndGender" resultType="person">-->
+  <!--select * from person where username = #{username} AND gender = #{gender}-->
+  <!--</select>-->
+
+  <!--<select id="getPersonByNameAndGender" resultType="person">-->
+  <!--select * from person where username = #{name} AND gender = #{gender}-->
+  <!--</select>-->
+
+  <!--<select id="getPersonByNameAndGender" resultType="person">-->
+  <!--select * from person where username = #{name1} AND gender = #{gender1}-->
+  <!--</select>-->
+
+  <!--<select id="getPersonByNameAndGender" resultType="person">-->
+  <!--select * from person where username = #{name1} AND gender = #{param2}-->
+  <!--</select>-->
+
+  <!--<select id="getPersonByCollection" resultType="person">-->
+    <!--select * from person where id=#{collection[0]}-->
+  <!--或者用list-->
+  <!--select * from person where id=#{list[0]}-->
+  <!--</select>-->
+
+  <select id="getPersonByCollection" resultType="person">
+    select * from person where id=#{test[0]}
+  </select>
+
+  <select id="getPersonsByIds" resultType="person">
+--     select * from person where id in( #{array[0]}, #{array[1]} )
+-- 以下是优化的方法
+    select * from person where id in
+
+    <foreach collection="array" item="id" index="i" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+
+  </select>
+
+  <!--mybatis批量插入数据到数据库方式一：-->
+  <insert id="addPersons">
+    insert into person(username,email,gender) VALUES
+    <foreach collection="persons" item="person" separator=",">
+      (#{person.username},#{person.email},#{person.gender})
+    </foreach>
+  </insert>
+
+  <!--mybatis批量插入数据到数据库方式二：-->
+  <!-- <insert id="addPersons">
+     <foreach collection="persons" item="person" separator=";">
+        insert into person(username,email,gender) VALUES
+       (#{person.username},#{person.email},#{person.gender})
+      </foreach>
+   </insert>-->
+
+  <!--mybatis批量插入数据到数据库方式三：（基于SqlSession的ExecutorType进行批量添加，是批量插入的最终解决方案，可以处理数据量大的情况）-->
+  <insert id="addPerson" parameterType="person">
+    insert into person(username,email,gender) VALUES (#{username},#{email},#{gender})
+  </insert>
+
+  <select id="getAllPersons" resultType="person">
+    SELECT  * from person
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--<resultMap id="BaseResultMap" type="com.mooc.mybatis.bean.Person" >-->
+    <!--<id column="id" property="id" jdbcType="INTEGER" />-->
+    <!--<result column="username" property="username" jdbcType="VARCHAR" />-->
+    <!--<result column="email" property="email" jdbcType="VARCHAR" />-->
+    <!--<result column="gender" property="gender" jdbcType="VARCHAR" />-->
+    <!--<result column="dept_id" property="deptId" jdbcType="INTEGER" />-->
+  <!--</resultMap>-->
+
+  <!--<sql id="insertColum" >-->
+    <!--username, email, gender, dept_id-->
+  <!--</sql>-->
+
+ <!-- insert into person(username,email,gender) VALUES("zhangsan","zhangsan@163.com","F"),("lisi","lisi@163.com","F")
+
+  insert into person(username,email,gender) VALUES("tom","zhangsan@163.com","F");
+  insert into person(username,email,gender) VALUES("jerry","lisi@163.com","F")-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="getPersonsByIds" resultType="person">
+
+    select * from person where id in
+
+    <foreach collection="array" item="id" index="i" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+
+
+  </select>
+
+  <select id="getPersonByCollection" resultType="person">
+
+    select * from person where id=#{test[0]}
+  </select>
+
+
+  <!-- 根据多参数进行数据的查询-->
+  <select id="getPersonByNameAndGender" resultType="person">
+
+    select * from person where username=#{username} and gender=#{param2}
+
+  </select>
+
+
+<!-- 根据id删除数据-->
+  <delete id="deletePerson" parameterType="int">
+
+      delete from person where id=#{parameter1}
+
+  </delete>
+
+
+
+
+
+</mapper>

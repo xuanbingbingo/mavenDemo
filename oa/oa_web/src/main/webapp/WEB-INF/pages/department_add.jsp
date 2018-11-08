@@ -9,6 +9,7 @@
         </div>
         <div class="admin-form theme-primary mw1000 center-block" style="padding-bottom: 175px;">
             <div class="panel heading-border">
+                <%--spring mvc提供的form标签--%>
                 <form:form action="/department/add" modelAttribute="department"  id="admin-form" name="addForm">
                     <div class="panel-body bg-light">
                         <div class="section-divider mt20 mb40">
