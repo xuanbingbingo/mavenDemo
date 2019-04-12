@@ -1,0 +1,21 @@
+server:
+  port: 7001
+  servlet:
+    context-path: /my
+debug: true
+logging:
+  level:
+    root: info
+  file: myspringboot.log
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: 123456
+
+#也可自定义配置
+mall:
+  config:
+    name: bingo
+    age: 18

@@ -15,4 +15,5 @@
 ## springMVCRestful是spring mvc中使用restful方式进行请求的解析和响应的案例
 ## springMVCIntercepter是spring mvc中使用拦截器来进行用户登陆拦截的配置和使用
 ## myspringboot是spring boot的开发流程配置
+## myspringbootstarter是通过spring initializr一键创建spring boot项目，同时包含基本配置的一个空白项目（后期开发时可直接使用这个搭建好的空白项目）
 ## oa是ssm整合开发的一个简易oa系统（主要有人员管理，报销单的审批等功能），是后面使用ssm架构开发项目可供参考的项目架构
