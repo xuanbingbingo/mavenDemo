@@ -1,4 +1,11 @@
+
+
 #设置使用开发环境的配置
 spring:
   profiles:
     active: dev
+
+#公共配置与profiles选择无关
+mybatis:
+  typeAliasesPackage: com.shuiyou.myspringboot.entity
+  mapperLocations: classpath:mapper/*.xml

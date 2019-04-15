@@ -1,7 +1,7 @@
 server:
-  port: 7001
-  servlet:
-    context-path: /my
+  port: 7002
+#  servlet:
+#    context-path: /my
 debug: true
 logging:
   level:
@@ -12,7 +12,9 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test
     username: root
-    password: 123456
+    password: root
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
 
 #也可自定义配置
 mall:
