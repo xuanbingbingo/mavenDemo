@@ -1,1 +1,1 @@
-利用springbootinitializr自动构建springboot应用
+浣跨敤spring initializr鍒濆鍖栫殑maven椤圭洰锛屽悓鏃堕泦鎴愪簡mybatis閰嶇疆锛屾湁涓�涓畝鍗曠殑demo锛堝悗鏈焥pring boot椤圭洰鍙互鐩存帴浣跨敤杩欎釜绌虹櫧椤圭洰杩涜寮�鍙戯級
